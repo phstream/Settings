@@ -42,7 +42,7 @@
 #define RET_ERRNO (-(errno + ERRNO_OFFSET))
 #define RET_ERRVAL(x) (-(x + ERRNO_OFFSET))
 
-EXT_API int
+LIB_EXPORT int
 ini_version() 
 {
     return INI_VERSION_MAJOR * 1000000
@@ -50,7 +50,7 @@ ini_version()
          + INI_VERSION_BUILD;
 }
 
-EXT_API const char*
+LIB_EXPORT const char*
 ini_error_string(int err) 
 {
     if (err >= 0) return "No Error"; /* Success or valid data */
@@ -355,7 +355,7 @@ ini_scan_for_key(FILE* in_file,
     return 0; /* Key not found */
 }
 
-EXT_API int
+LIB_EXPORT int
 ini_get_section(const char* filename,
                 const char* p_section,
                 char* p_key[], size_t size_keys,
@@ -382,7 +382,7 @@ ini_get_section(const char* filename,
     if (len < 0) return len;
 
 }
-EXT_API int
+LIB_EXPORT int
 ini_read_key(const char* filename,
              const char* p_section,
              const char* p_key,
@@ -417,7 +417,7 @@ ini_read_key(const char* filename,
     return ini_parse_value(buffer + i, p_value, value_size);
 }
 
-EXT_API int
+LIB_EXPORT int
 ini_write_key(const char* filename, 
               const char* p_section, 
               const char* p_key, 

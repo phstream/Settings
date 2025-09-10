@@ -27,37 +27,41 @@ extern "C" {
 #endif
 
 /*
- * Define EXT_API for shared/static library builds.
+ * Define LIB_EXPORT for shared/static library builds.
  * Use -DBUILD_AS_LIB when building a shared library.
  */
-#ifndef EXT_API
-  #ifdef BUILD_LIB
-    #if defined(_WIN32) || defined(_WIN64)
-      #define EXT_API __declspec(dllexport)
-    #elif defined(__GNUC__) && __GNUC__ >= 4
-      #define EXT_API __attribute__((visibility("default")))
-    #else
-      #error "EXT_API: Unknown platform or compiler. Please define EXT_API manually."
-    #endif
+#if defined(_WIN32) || defined(_WIN64)
+  #if defined(BUILD_LIB)
+    #define LIB_EXPORT __declspec(dllexport)
+  #elif defined(USING_LIB)
+    #define LIB_EXPORT __declspec(dllimport)
   #else
-    #define EXT_API
+    #define LIB_EXPORT
   #endif
+#elif defined(__GNUC__) && __GNUC__ >= 4
+  #if defined(BUILD_LIB)
+    #define LIB_EXPORT __attribute__((visibility("default")))
+  #else
+    #define LIB_EXPORT
+  #endif
+#else
+  #define LIB_EXPORT
 #endif
 
-EXT_API int
+LIB_EXPORT int
 ini_version();
 
-EXT_API const char*
+LIB_EXPORT const char*
 ini_error_string(int err);
 
-EXT_API int
+LIB_EXPORT int
 ini_read_key(const char* filename,
              const char* p_section,
              const char* p_key,
              char* p_value,
              size_t value_size);
 
-EXT_API int
+LIB_EXPORT int
 ini_write_key(const char* filename, 
               const char* p_section, 
               const char* p_key, 

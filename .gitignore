@@ -1,3 +1,7 @@
+# Settings project
+.vscode/
+
+
 # Prerequisites
 *.d
 

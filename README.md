@@ -1,9 +1,9 @@
-´´´
+```
 _ _|  \  |_ _|
   |    \ |  |
   |  |\  |  |  INI-File Parser Version 0.2.0
 ___|_| \_|___| Author: Peter Hillerström 2025, License: MIT
- ```
+```
 # Settings
 ## 🚧 Work in progress  🚧
 Settings Handler with INI-reader/writer.
